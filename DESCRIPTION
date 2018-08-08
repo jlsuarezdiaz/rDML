@@ -1,0 +1,10 @@
+Package: rDML
+Type: Package
+Title: Distance Metric Learning Algorithms for R
+Version: 0.0.1
+Author: Juan Luis Suárez Díaz
+Maintainer: Juan Luis Suárez Díaz <jlsuarezd@gmail.com>
+Description: Many machine learning algorithms need a similarity measure to carry out their tasks. Usually, standard distances, like euclidean distance, are used to measure this similarity. Distance Metric Learning algorithms try to learn an optimal distance from the data.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
