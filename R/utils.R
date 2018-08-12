@@ -33,7 +33,8 @@ as.numeric_or_null <- function(x){
 # @return A list with every numeric item as integer.
 # @export
 numeric.as.integer <- function(x){
-  return(lapply(l, function(x){if(is.numeric(x)){as.integer(x)} else{x}}))
+  if(is.null(x)) return(NULL)
+  return(lapply(x, function(s){if(is.numeric(s) && !is.null(s)){ return(as.integer(s))} else{return(s)}}))
 }
 
 # Console log

@@ -68,13 +68,14 @@ tuners <-
     "tune")
 
 plotters <-
-  c("classifier_plot",
-    "dml_plot",
+  c(#"classifier_plot",
+    #"dml_plot",
     "knn_plot",
     "dml_multiplot",
-    "classifier_pairplots",
-    "dml_pairplots",
-    "knn_pairplots",
-    "classifier_plot_3d")
+    #"classifier_pairplots",
+    #"dml_pairplots",
+    "knn_pairplots"
+    #"classifier_plot_3d"
+    )
 
 

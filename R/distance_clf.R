@@ -11,13 +11,13 @@ source("R/utils.R")
 # @export
 rinitialize_clf <- function(clf){
   rclf = list()
-  for(key in names(dml_alg)){
-    rdml[[key]] = dml_alg[[key]]
+  for(key in names(clf)){
+    rclf[[key]] = clf[[key]]
   }
   # Update any dml function here if a functionality update is needed respect to pyDML.
   # Example: rclf$fit = function(X,y){ ... new code for fit in R ... }
 
-  return(rdml)
+  return(rclf)
 }
 
 # k-Nearest Neighbors (kNN)
@@ -26,6 +26,7 @@ rinitialize_clf <- function(clf){
 # @param n_neighbors Number of neighbors to consider in classification.
 # @param dml_algorithm The distance metric learning algorithm to use.
 # @return The kNN classifier, structured as a named list.
+# @export
 kNN <- function(n_neighbors, dml_algorithm){
   knn = pre_classifiers_$kNN(n_neighbors = as.integer(n_neighbors), dml_algorithm = dml_algorithm$py)
   rinitialize_clf(knn)
@@ -40,6 +41,7 @@ kNN <- function(n_neighbors, dml_algorithm){
 #        centroids to take in the i-th class. If it is an int, every class will have the same number of centroids.
 # @param ... Additional arguments for Scikit-Learn K-Means.
 # @return The NCMC classifier, structured as a named list.
+# @export
 NCMC_Classifier <- function(centroids_num = 3, ...){
   ncmc_classifier = pre_classifiers_$NCMC_Classifier(centroids_num = as.integer(centroids_num), ...)
   rinitialize_clf(ncmc_classifier)
@@ -53,6 +55,8 @@ NCMC_Classifier <- function(centroids_num = 3, ...){
 #        place of the dml list.
 # @param verbose Boolean. If True, console message about the algorithms execution will be printed.
 # @param ... Additional arguments for Scikit-Learn k-Neighbors Classifier.
+# @return The MultiDML_kNN classifier, structured as a named list.
+# @export
 MultiDML_kNN <- function(n_neighbors, dmls=NULL, verbose=FALSE, ...){
   dmls = sapply(dmls, function(x){ return(x$py)})
   mknn = pre_classifiers_$MultiDML_kNN(n_neighbors = as.integer(n_neighbors), dmls = dmls, verbose = verbose, ... = ...)
