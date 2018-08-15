@@ -34,7 +34,7 @@ Every linear map defines a single metric (M = L'L), and two linear maps that def
 
 ## Documentation
 
-Watch the package documentation [here](). For more details about the wrapped algorithms, see also the [pyDML's documentation](https://pydml.readthedocs.io).
+Watch the package documentation [here](https://jlsuarezdiaz.github.io/software/rDML/docs). For more details about the wrapped algorithms, see also the [pyDML's documentation](https://pydml.readthedocs.io).
 
 ## Installation
 
