@@ -2,7 +2,7 @@ Package: rDML
 Type: Package
 Title: Distance Metric Learning Algorithms for R
 Version: 0.0.1
-Author: Juan Luis Suárez Díaz
+Authors@R: person("Juan Luis","Suárez", email = "jlsuarezdiaz@gmail.com", role = c("aut","cre"))
 Maintainer: Juan Luis Suárez Díaz <jlsuarezd@gmail.com>
 Description: Many machine learning algorithms need a similarity measure to carry out their tasks.
     Usually, standard distances, like euclidean distance, are used to measure this similarity. 
@@ -13,5 +13,8 @@ LazyData: true
 Depends: R (>= 3.4)
 Suggests: testthat
 Imports: devtools, reticulate
+URL: https://github.com/jlsuarezdiaz/rDML
+BugReports: https://github.com/jlsuarezdiaz/rDML/issues/
 SystemRequeriments:
   Python (>=3.6); pyDML <https://pypi.org/project/pyDML/>
+RoxygenNote: 6.1.0

@@ -1,0 +1,102 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - examples
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      icon: fa-book fa-lg
+      text: Reference
+      href: reference/index.html
+    intro:
+      icon: fa-play-circle fa-lg
+      text: Get started
+      href: articles/rDML.html
+    articles:
+      icon: fa-question fa-lg
+      text: Examples
+      #menu:
+      #- text: Fitting Distance Metric Learning algorithms
+      #  href: articles/examples/fitting_dmls.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/jlsuarezdiaz/rDML
+
+articles:
+- title: All vignettes
+  desc: ~
+  contents:
+  - '`examples/fitting_dmls`'
+  - '`rDML`'
+
+examples:
+- title: Examples
+  desc: ~
+  contents:
+  #- - '`examples/fitting_dmls`'
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`ANMM`'
+  - '`DMLMJ`'
+  - '`DML_eig`'
+  - '`Euclidean`'
+  - '`ITML`'
+  - '`KANMM`'
+  - '`KDA`'
+  - '`KDMLMJ`'
+  - '`KLMNN`'
+  - '`LDA`'
+  - '`LDML`'
+  - '`LMNN`'
+  - '`LSI`'
+  - '`MCML`'
+  - '`Metric`'
+  - '`MultiDML_kNN`'
+  - '`NCA`'
+  - '`NCMC`'
+  - '`NCMC_Classifier`'
+  - '`NCMML`'
+  - '`PCA`'
+  - '`Transformer`'
+  - '`all_dmls`'
+  - '`as.integer_or_null`'
+  - '`as.numeric_or_null`'
+  - '`as.type_or_null`'
+  - '`base_dmls`'
+  - '`classifiers`'
+  - '`console.log`'
+  - '`dimensionality_reduction_dmls`'
+  - '`distance_clf`'
+  - '`dml`'
+  - '`dml_multiplot`'
+  - '`dml_plotter`'
+  - '`dml_tune`'
+  - '`generic_dmls`'
+  - '`information_theory_based_dmls`'
+  - '`kNN`'
+  - '`kernel_dmls`'
+  - '`knn_oriented_dmls`'
+  - '`knn_pairplots`'
+  - '`knn_plot`'
+  - '`ncm_oriented_dmls`'
+  - '`non_supervised_dmls`'
+  - '`numeric.as.integer`'
+  - '`plotters`'
+  - '`rinitialize`'
+  - '`rinitialize_clf`'
+  - '`supervised_dmls`'
+  - '`tune`'
+  - '`tune_knn`'
+  - '`tuners`'
+

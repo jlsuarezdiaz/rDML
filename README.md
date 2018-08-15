@@ -34,10 +34,11 @@ Every linear map defines a single metric (M = L'L), and two linear maps that def
 
 ## Documentation
 
+Watch the package documentation [here](). For more details about the wrapped algorithms, see also the [pyDML's documentation](https://pydml.readthedocs.io).
 
 ## Installation
 
-
+- From GitHub: from the R console, install the package `devtools`. Then, run the command `devtools::install_github("jlsuarezdiaz/rDML")`.
 
 ## Authors
 

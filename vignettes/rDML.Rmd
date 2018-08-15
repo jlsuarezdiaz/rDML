@@ -1,0 +1,70 @@
+---
+title: "Get Started"
+author: "Juan Luis Suárez Díaz"
+output: html_document
+---
+
+## What is a distance metric learning algorithm?
+
+A distance metric learning algorithm (DML) is an algorithm that can learn a similarity measure or distance from the data. This distance can be used for many purposes, such as improving distance based algorithms wither in supervised, semi-supervised or unsupervised learning. DMLs also have interesting applications in dimensionality reduction.
+
+## How to learn a distance
+
+The (pseudo-)distances learned by distance metric learning algorithms are also known as Mahalanobis distances. This distances are determined by positive semidefinite matrices $M \in \mathcal{M}_d(\mathbb{R})$, and can be calculated as
+\[ d(x,y) = \sqrt{(x-y)^TM(x-y)}, \]
+for $x, y \in \mathbb{R}^d$. It is known that the PSD matrix $M$ can be decomposed as $M = L^TL$, with $L \in \mathcal{M}_d(\mathbb{R})$ is an arbitrary matrix. In this case, we have
+\[ d(x,y)^2 = (x-y)^TL^TL(x-y) = (L(x-y))^T(L(x-y)) = \|L(x-y)\|_2^2. \]
+So every Mahalanobis distance is equivalent to the euclidean distance after applying the linear mapping $L$.
+
+Matrices $M$ and $L$ define the two approaches for learning a distance. We can either learn the metric matrix $M$ which defines the distance, or learn the linear map $L$, and calculate the distance in the mapped space. Each DML will learn the distance following one of these approaches.
+
+## Current algorithms
+
+The current available algorithms are:
+
+- [Principal Component Analysis (PCA)](../reference/PCA.html)
+- [Linear Discriminant Analysis (LDA)](../reference/LDA.html)
+- [Average Neighborhood Margin Maximization (ANMM)](../reference/ANMM.html)
+- [Large Margin Nearest Neighbors (LMNN)](../reference/LMNN.html)
+- [Neighborhood Component Analysis (NCA)](../reference/NCA.html)
+- [Nearest Class Mean Metric Learning (NCMML)](../reference/NCMML.html)
+- [Nearest Class with Multiple Centroids (NCMC)](../reference/NCMC.html)
+- [Information Theoretic Metric Learning (ITML)](../reference/ITML.html)
+- [Distance Metric Learning through the Maximization of the Jeffrey divergence (DMLMJ)](../reference/DMLMJ.html)
+- [Maximally Collapsing Metric Learning (MCML)](../reference/MCML.html)
+- [Learning with Side Information (LSI)](../reference/LSI.html)
+- [Distance Metric Learning with Eigenvalue Optimization (DML-eig)](../reference/DML_eig.html)
+- [Logistic Discriminant Metric Learning (LDML)](../reference/LDML.html)
+- [Kernel Large Margin Nearest Neighbors (KLMNN)](../reference/KLMNN.html)
+- [Kernel Average Neighborhood Margin Maximization (KANMM)](../reference/KANMM.html)
+- [Kernel Distance Metric Learning through the Maximization of the Jeffrey divergence (KDMLMJ)](../reference/KDMLMJ.html)
+- [Kernel Discriminant Analysis (KDA)](../reference/KDA.html)
+
+## Additional functionalities
+
+- Distance based classifiers: [k-NN + DML](../reference/kNN.html) and [NCMC Classifier](../reference/NCMC_Classifier.html)
+- Make plots of distance classifiers with different distances: [knn_plot](../reference/knn_plot.html), [dml_multiplot](../reference/dml_multiplot.html) and [knn_pairplots](../reference/knn_pairplots.html)
+- Parameters estimation with cross validation: [tune_knn](../reference/tune_knn.html) and [tune](../reference/tune.html).
+
+## Examples
+
+Get started with the [following examples](./examples/)
+
+## See also
+
+The [pyDML software](https://github.com/jlsuarezdiaz/pyDML/), which is the DML software used by rDML, and its [documentation](https://pydml.readthedocs.io/).
+
+## References
+
+- Fei Wang and Changshui Zhang. “Feature extraction by maximizing the average neighborhood margin”. In: Computer Vision and Pattern Recognition, 2007. CVPR’07. IEEE Conference on. IEEE. 2007, pages 1-8.
+- Kilian Q Weinberger and Lawrence K Saul. “Distance metric learning for large margin nearest neighbor classification”. In: Journal of Machine Learning Research 10.Feb (2009), pages 207-244.
+- Jacob Goldberger et al. “Neighbourhood components analysis”. In: Advances in neural information processing systems. 2005, pages 513-520.
+- Thomas Mensink et al. “Metric learning for large scale image classification: Generalizing to new classes at near-zero cost”. In: Computer Vision–ECCV 2012. Springer, 2012, pages 488-501.
+- Jason V Davis et al. “Information-theoretic metric learning”. In: Proceedings of the 24th international conference on Machine learning. ACM. 2007, pages 209-216.
+- Bac Nguyen, Carlos Morell and Bernard De Baets. “Supervised distance metric learning through maximization of the Jeffrey divergence”. In: Pattern Recognition 64 (2017), pages 215-225.
+- Amir Globerson and Sam T Roweis. “Metric learning by collapsing classes”. In: Advances in neural information processing systems. 2006, pages 451-458.
+- Eric P Xing et al. “Distance metric learning with application to clustering with side-information”. In: Advances in neural information processing systems. 2003, pages 521-528.
+- Yiming Ying and Peng Li. “Distance metric learning with eigenvalue optimization”. In: Journal of Machine Learning Research 13.Jan (2012), pages 1-26.
+- Matthieu Guillaumin, Jakob Verbeek and Cordelia Schmid. “Is that you? Metric learning approaches for face identification”. In: Computer Vision, 2009 IEEE 12th international conference on. IEEE. 2009, pages 498-505.
+- Sebastian Mika et al. “Fisher discriminant analysis with kernels”. In: Neural networks for signal processing IX, 1999. Proceedings of the 1999 IEEE signal processing society workshop. Ieee. 1999, pages 41-48.
+- Lorenzo Torresani and Kuang-chih Lee. “Large margin component analysis”. In: Advances in neural information processing systems. 2007, pages 1385-1392.
