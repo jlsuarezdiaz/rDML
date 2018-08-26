@@ -1,0 +1,58 @@
+---
+title: "Tuning parameters"
+author: "Juan Luis Suárez Díaz"
+output: html_document
+---
+
+First, we load the needed libraries.
+```{r, echo=T, results='hide'}
+library(datasets)
+library(rDML)
+```
+
+We will use the iris dataset.
+```{r}
+# Loading dataset
+data(iris)
+X = iris[1:4]
+y = as.array(as.numeric(iris[5][,1]))
+```
+
+A tune function is available for parameter estimation in DML algorithms. We can choose the algorithm to tune giving it string abbreviation. We can set some fixed parameters in the argument `dml_params`. The parameters to estimate are added in `tune_args`, as a named list. Each entry has as name a parameter of the DML, and its value is a list with all the values to estimate. The metrics used to measure the algorithm performances can be either different k-NN classifications, or any of the algorithm numeric metadata. The estimation will be done using cross validation.
+
+```{r, echo=T}
+  result_list = dml_tune$tune(dml = "NCA",X = X,y = y, dml_params = list(descent_method = "SGD"), 
+                              tune_args = list(eta0 = c(0.3,0.1,0.01), num_dims = as.integer(c(2,4))), 
+                              metrics = list("final_expectance", 3,5),n_folds = 5,n_reps = 2,
+                              verbose = TRUE, seed = 28)
+```
+
+We obtain many information after tuning the algorithm:
+
+```{r}
+  results = result_list[[1]]
+  best = result_list[[2]]
+  nca_best = result_list[[3]]
+  detailed = result_list[[4]]
+```
+
+From `results` we obtain the average cross validation results:
+```{r}
+results
+```
+
+In `best` we can isolate the best result (according to the first metric specified):
+```{r}
+best
+```
+
+Also, we can take the algorithm with the best parameters ready to be fitted.
+```{r, echo=T,results='hide'}
+nca_best$fit(X,y)
+nca_best$transform()[1:5,]
+```
+
+Finally, we can also look at the detailed results for each fold in the cross validation, with `detailed`:
+```{r}
+  detailed$`{'eta0': 0.3, 'num_dims': 2}`
+```

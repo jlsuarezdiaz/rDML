@@ -1,0 +1,34 @@
+---
+title: "Plotting regions induced by distances"
+author: "Juan Luis Suárez Díaz"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+First, we load the needed libraries.
+```{r, echo=T, results='hide'}
+library(datasets)
+library(rDML)
+```
+
+We will use the iris dataset.
+```{r}
+# Loading dataset
+data(iris)
+X = iris[1:4]
+y = as.array(as.numeric(iris[5][,1]))
+```
+
+The DML algorithms we will use:
+```{r}
+nca = dml$NCA()
+lda = dml$LDA()
+```
+
+```{r}
+  f = dml_plotter$knn_plot(X[1:2],y,k = 3,dml = nca, cmap = "rainbow")
+  #f$show()
+```

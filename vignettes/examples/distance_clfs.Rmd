@@ -1,0 +1,80 @@
+---
+title: "Using distance based algorithms"
+author: "Juan Luis Suárez Díaz"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+First, we load the needed libraries.
+```{r, echo=T, results='hide'}
+library(datasets)
+library(rDML)
+```
+
+We will use the iris dataset.
+```{r}
+# Loading dataset
+data(iris)
+X = iris[1:4]
+y = as.array(as.numeric(iris[5][,1]))
+```
+
+Let's use the k-NN classifier with a DML algorithm.
+```{r}
+nca = dml$NCA()
+knn = distance_clf$kNN(n_neighbors = 7, dml_algorithm = nca)
+```
+
+Now, we fit the transformer and the predictor.
+```{r, echo=T, results='hide'}
+nca$fit(X,y)
+knn$fit(X,y)
+```
+
+We can now predict the labels for the k-NN with the learned distance,
+```{r}
+# The predictions for the training set. They are made leaving the sample to predict out.
+knn$predict()
+
+# We can also make predictions for new collected data.
+X_ = matrix(nrow = 3, ncol = 4, data = c(1,0,0,0,
+                                         1,1,0,0,
+                                         1,1,1,0))
+knn$predict(X_)
+```
+
+and see the classification scores.
+```{r}
+# Score for the training set (leaving one out)
+knn$score()
+
+# Scoring test data
+y_ = as.numeric(c(1,2,2))
+knn$score(X_,y_)
+```
+
+
+Another interesting classifier is NCMC. With this classifier we can make predicitions by choosing the class who has a centroid the nearest. The centroids number can be set for each class and are calculated using k-Means over each class subdataset. We can use it in the same way as the previous classifier.
+
+```{r, echo=T,results='hide'}
+ncmc = distance_clf$NCMC_Classifier(centroids_num = c(2,3,4))
+ncmc$fit(X,y)
+
+```
+```{r}
+ncmc$score(X,y)
+```
+
+If we want to use this classifier with the learned distance, we may transform the data first.
+```{r, echo=T,results='hide'}
+Lx = nca$transform()
+ncmc = distance_clf$NCMC_Classifier(centroids_num = c(2,3,4))
+ncmc$fit(Lx,y)
+
+```
+```{r}
+ncmc$score(Lx,y)
+```

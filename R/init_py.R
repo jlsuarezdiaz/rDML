@@ -1,5 +1,8 @@
-source("R/utils.R")
+#source("R/utils.R")
 
-library(reticulate)
 
-pydml = import("dml")
+pydml <- NULL
+
+.init_py <- function(){
+  pydml <<- reticulate::import("dml")
+}

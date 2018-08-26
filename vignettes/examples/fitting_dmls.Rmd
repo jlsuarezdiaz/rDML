@@ -1,0 +1,65 @@
+---
+title: "Fitting distance metric algorithms"
+author: "Juan Luis Suárez Díaz"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+First, we load the needed libraries.
+```{r, echo=T, results='hide'}
+library(datasets)
+library(rDML)
+```
+
+We will use the iris dataset.
+```{r}
+# Loading dataset
+data(iris)
+X = iris[1:4]
+y = iris[5][,1]
+```
+
+We construct the NCA transformer, and we fit it with the data in iris.
+
+```{r, echo=T, results='hide'}
+# DML construction
+nca = NCA()
+
+# Fitting algorithm
+nca$fit(X,y)
+```
+
+Once fitted, we can look at the algorithm metadata.
+```{r}
+# We can look at the algorithm metadata after fitting it
+meta = nca$metadata()
+meta
+
+```
+
+Also we can see the metric or the transformed we have learned.
+```{r}
+# We can see the metric the algorithm has learned
+M = nca$metric()
+M
+#Equivalent, we can see the learned linear map
+L = nca$transformer()
+L
+```
+
+We can use the transformer to map data to the space defined by the learned distance.
+```{r}
+# Finally, we can obtain the transformed data ...
+Lx = nca$transform()
+Lx[1:5,]
+
+# ... or transform new data.
+X_ = matrix(nrow = 3, ncol = 4, data = c(1,0,0,0,
+                                         1,1,0,0,
+                                         1,1,1,0))
+Lx_ = nca$transform(X_)
+Lx_
+```

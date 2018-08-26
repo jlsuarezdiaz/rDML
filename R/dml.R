@@ -1,7 +1,7 @@
 # DMLS WRAPPER
 
-source("R/filter.R")
-source("R/utils.R")
+#source("R/filter.R")
+#source("R/utils.R")
 
 #' R DML objects initializer.
 #'
@@ -541,8 +541,13 @@ Euclidean <- function(){
 #' The DML global list.
 #'
 #' This list contains all the DML Algorithm constructors.
-dml = list()
-for(key in names(pre_dml_)){
-  console.log(paste("Adding R-DML algorithm ",toString(key),"..."))
-  dml[[key]] = get(key)
+dml <- NULL
+
+.init_dml <- function(){
+  dml_ <- list()
+  for(key in names(pre_dml_)){
+    console.log(paste("Adding R-DML algorithm ",toString(key),"..."))
+    dml_[[key]] = get(key)
+  }
+  dml <<- dml_
 }

@@ -75,7 +75,12 @@ tune <- function(dml, X, y, dml_params, tune_args, metrics, n_folds = 5, n_reps 
 #'
 #' This list contains all the tune functions.
 dml_tune = list()
-for(key in names(pre_tuners_)){
-  console.log(paste("Adding R-Tune ",toString(key),"..."))
-  dml_tune[[key]] = get(key)
+
+.init_tune <- function(){
+  tune_ <<- dml_tune
+  for(key in names(pre_tuners_)){
+    console.log(paste("Adding R-Tune ",toString(key),"..."))
+    tune_[[key]] = get(key)
+  }
+  dml_tune <<- tune_
 }

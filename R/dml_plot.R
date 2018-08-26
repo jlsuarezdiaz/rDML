@@ -231,7 +231,13 @@ knn_pairplots <- function(X, y, k=1, attrs=NULL, xattrs=NULL, yattrs=NULL, diag=
 #'
 #' This list contains all the tune functions.
 dml_plotter = list()
-for(key in names(pre_plotters_)){
-  console.log(paste("Adding R-Plotter ",toString(key),"..."))
-  dml_plotter[[key]] = get(key)
+
+.init_plot <- function(){
+  plot_ <<- dml_plotter
+  for(key in names(pre_plotters_)){
+    console.log(paste("Adding R-Plotter ",toString(key),"..."))
+    plot_[[key]] = get(key)
+  }
+  dml_plotter <<- plot_
+
 }

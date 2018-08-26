@@ -71,7 +71,12 @@ MultiDML_kNN <- function(n_neighbors, dmls=NULL, verbose=FALSE, ...){
 #'
 #' This list contains all the distance classifier constructors.
 distance_clf = list()
-for(key in names(pre_classifiers_)){
-  console.log(paste("Adding R-Distance Classifier ",toString(key),"..."))
-  distance_clf[[key]] = get(key)
+
+.init_clf <- function(){
+  dclf_ <<- distance_clf
+  for(key in names(pre_classifiers_)){
+    console.log(paste("Adding R-Distance Classifier ",toString(key),"..."))
+    dclf_[[key]] = get(key)
+  }
+  distance_clf <<- dclf_
 }
