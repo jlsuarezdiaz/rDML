@@ -1,12 +1,18 @@
+docs:
+  tags:
+  - master
+  - v0.0.1
+
+development:
+  mode: devel
+
 navbar:
   structure:
     left:
     - home
     - intro
     - reference
-    - examples
-    - tutorials
-    - news
+    - articles
     right: github
   components:
     home:
@@ -21,27 +27,19 @@ navbar:
       text: Get started
       href: articles/rDML.html
     articles:
-      icon: fa-question fa-lg
       text: Examples
-      #menu:
-      #- text: Fitting Distance Metric Learning algorithms
-      #  href: articles/examples/fitting_dmls.html
+      menu:
+      - text: Fitting Distance Metric Learning algorithms
+        href: examples/fitting_dmls.html
+      - text: Using distance based classifiers
+        href: articles/examples/distance_clfs.html
+      - text: Tuning parameters of Distance Metric Learning algorithms
+        href: articles/examples/tuning_parameters.html
+      icon: fa-question fa-lg
     github:
       icon: fa-github fa-lg
       href: https://github.com/jlsuarezdiaz/rDML
 
-articles:
-- title: All vignettes
-  desc: ~
-  contents:
-  - '`examples/fitting_dmls`'
-  - '`rDML`'
-
-examples:
-- title: Examples
-  desc: ~
-  contents:
-  #- - '`examples/fitting_dmls`'
 
 reference:
 - title: All functions
@@ -99,4 +97,12 @@ reference:
   - '`tune`'
   - '`tune_knn`'
   - '`tuners`'
+
+articles:
+- title: All examples
+  desc: ~
+  contents:
+  - '`examples/fitting_dmls`'
+  - '`examples/distance_clfs`'
+  - '`examples/tuning_parameters`'
 

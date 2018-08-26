@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitting Distance Metric Learning algorithms • rDML</title>
+<title>Fitting distance metric algorithms • rDML</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
-<script src="../../pkgdown.js"></script><meta property="og:title" content="Fitting Distance Metric Learning algorithms">
+<script src="../../pkgdown.js"></script><meta property="og:title" content="Fitting distance metric algorithms">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">rDML</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1</span>
+        <span class="label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased package">0.0.1</span>
       </span>
     </div>
 
@@ -65,10 +65,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../../articles/examples/fitting_dmls.html">Fitting Distance Metric Learning algorithms</a>
+      <a href="../../articles/examples/distance_clfs.html">Using distance based classifiers</a>
     </li>
     <li>
-      <a href="../../articles/examples/index.html">Examples</a>
+      <a href="../../articles/examples/fitting_dmls.html">Fitting distance metric algorithms</a>
     </li>
   </ul>
 </li>
@@ -92,7 +92,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Fitting Distance Metric Learning algorithms</h1>
+      <h1>Fitting distance metric algorithms</h1>
                         <h4 class="author">Juan Luis Suárez Díaz</h4>
             
       
@@ -103,38 +103,72 @@
 
     
     
-<div id="r-markdown" class="section level2">
-<h2 class="hasAnchor">
-<a href="#r-markdown" class="anchor"></a>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cars)</code></pre></div>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#including-plots" class="anchor"></a>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="fitting_dmls_files/figure-html/pressure-1.png" width="700"></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
-</div>
+<p>First, we load the needed libraries.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datasets)
+<span class="kw">library</span>(rDML)</code></pre></div>
+<p>We will use the iris dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Loading dataset</span>
+<span class="kw">data</span>(iris)
+X =<span class="st"> </span>iris[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+y =<span class="st"> </span>iris[<span class="dv">5</span>][,<span class="dv">1</span>]</code></pre></div>
+<p>We construct the NCA transformer, and we fit it with the data in iris.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DML construction</span>
+nca =<span class="st"> </span><span class="kw"><a href="../../reference/NCA.html">NCA</a></span>()
+
+<span class="co"># Fitting algorithm</span>
+nca<span class="op">$</span><span class="kw">fit</span>(X,y)</code></pre></div>
+<p>Once fitted, we can look at the algorithm metadata.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can look at the algorithm metadata after fitting it</span>
+meta =<span class="st"> </span>nca<span class="op">$</span><span class="kw">metadata</span>()
+meta</code></pre></div>
+<pre><code>## $num_iters
+## [1] 2
+## 
+## $initial_expectance
+## [1] 0.8380717
+## 
+## $final_expectance
+## [1] 0.9549347</code></pre>
+<p>Also we can see the metric or the transformed we have learned.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can see the metric the algorithm has learned</span>
+M =<span class="st"> </span>nca<span class="op">$</span><span class="kw">metric</span>()
+M</code></pre></div>
+<pre><code>##            [,1]       [,2]      [,3]      [,4]
+## [1,]  1.1895714  0.4409538 -1.894276 -1.672692
+## [2,]  0.4409538  1.5526059 -1.821239 -1.692990
+## [3,] -1.8942764 -1.8212391  5.656832  4.732213
+## [4,] -1.6726925 -1.6929897  4.732213  5.519085</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Equivalent, we can see the learned linear map</span>
+L =<span class="st"> </span>nca<span class="op">$</span><span class="kw">transformer</span>()
+L</code></pre></div>
+<pre><code>##             [,1]        [,2]       [,3]       [,4]
+## [1,]  0.85483243 -0.00198076 -0.3903096 -0.2908216
+## [2,]  0.01822909  1.07767664 -0.3696151 -0.3295847
+## [3,] -0.56577195 -0.50491497  2.0925983  1.2171912
+## [4,] -0.37202515 -0.36915568  0.9944381  1.9606956</code></pre>
+<p>We can use the transformer to map data to the space defined by the learned distance.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Finally, we can obtain the transformed data ...</span>
+Lx =<span class="st"> </span>nca<span class="op">$</span><span class="kw">transform</span>()
+Lx[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</code></pre></div>
+<pre><code>##          [,1]     [,2]       [,3]       [,4]
+## [1,] 3.748115 3.281459 -1.4795635 -1.4050207
+## [2,] 3.578139 2.738974 -1.1139516 -1.1460378
+## [3,] 3.445807 2.987825 -1.3110401 -1.2449077
+## [4,] 3.282460 2.804312 -0.7854517 -0.9719021
+## [5,] 3.662434 3.387403 -1.4734778 -1.4047338</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ... or transform new data.</span>
+X_ =<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,
+                                         <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,
+                                         <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+Lx_ =<span class="st"> </span>nca<span class="op">$</span><span class="kw">transform</span>(X_)
+Lx_</code></pre></div>
+<pre><code>##            [,1]       [,2]      [,3]      [,4]
+## [1,]  0.5640108 -0.3113556 0.6514192 1.5886705
+## [2,] -0.2928024  0.7480919 0.7122762 1.5915399
+## [3,] -0.3922904  0.7080616 1.5876833 0.6252824</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#r-markdown">R Markdown</a></li>
-      <li><a href="#including-plots">Including Plots</a></li>
-      </ul>
-</div>
       </div>
 
 </div>

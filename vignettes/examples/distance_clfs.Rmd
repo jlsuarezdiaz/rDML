@@ -1,5 +1,5 @@
 ---
-title: "Using distance based algorithms"
+title: "Using distance based classifiers"
 author: "Juan Luis Suárez Díaz"
 output: html_document
 ---

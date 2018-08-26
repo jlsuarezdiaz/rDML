@@ -48,7 +48,7 @@ The current available algorithms are:
 
 ## Examples
 
-Get started with the [following examples](./examples/)
+Get started with the [following examples](./index.html)
 
 ## See also
 
